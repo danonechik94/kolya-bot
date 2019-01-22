@@ -32,15 +32,15 @@ dispatcher = updater.dispatcher
 def new_member(bot, update):
     for member in update.message.new_chat_members:
         if member.username == 'Kolya71Bot':
-            with open("data/chat_ids.txt", "a") as chats_file:
+            with open("./data/chat_ids.txt", "a") as chats_file:
                 chats_file.write(str(update.message.chat.id))
-            with open("data/chat_infos.txt", "a") as chats_file:
+            with open("./data/chat_infos.txt", "a") as chats_file:
                 chat_info = '{} - {} (added {})'.format(update.message.chat.id, update.message.chat.title, update.message.date.strftime("%d/%m/%y %H:%M"))
                 chats_file.write(chat_info)
 
 def new_post(bot, update):
     if update.message.from_user.id in ALLOWED_USERS:
-        with open("data/chat_ids.txt", "r") as chats_file:
+        with open("./data/chat_ids.txt", "r") as chats_file:
             chat_ids = set([re.sub('\n+', '', s) for s in chats_file.readlines()])
             for chat_id in chat_ids:
                 text = update.message.text.replace('/new_post', '').strip()
@@ -63,7 +63,7 @@ def help(bot, update):
 
 def added_chats(bot, update):
     if update.message.from_user.id in ALLOWED_USERS:
-        with open("data/chat_infos.txt", "r") as chats_infos_file:
+        with open("./data/chat_infos.txt", "r") as chats_infos_file:
             bot.send_message(chat_id=update.message.chat.id, text=chats_infos_file.read(), parse_mode=ParseMode.MARKDOWN)
     else:
         bot.send_message(chat_id=update.message.chat.id, text='Сори чувак, но я общаюсь только со своими братишками @danonechik94, @Thunderbirddd')
