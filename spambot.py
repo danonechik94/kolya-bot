@@ -10,7 +10,7 @@ import logging
 logging.basicConfig(level=logging.ERROR,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-TOKEN = "796287471:AAGxBMXrTXHgRhRV9dZaiB_7Hv4Stw13AZQ"
+TOKEN = open('bot_token.key', 'r').read()
 updater = Updater(token=TOKEN)
 
 HELP_TEXT = """
